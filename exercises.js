@@ -1,15 +1,8 @@
 //  4.1
-const getTailArr = (arr) => {
-  const newArr = [];
-  for (let i = 1; i < arr.length; i += 1) {
-    newArr.push(arr[i]);
-  }
-  return newArr;
-}
-
 const sum = (arr) => {
   if (arr.length === 0) return 0;
-  return arr[0] + sum(getTailArr(arr));
+  const [ , ...tailArr] = arr;
+  return arr[0] + sum(tailArr);
 }
 
 console.log("Рекурсивный способ суммы чисел в массиве:", sum([1, 2, 3, 4]));
@@ -18,7 +11,8 @@ console.log("Рекурсивный способ суммы чисел в мас
 
 const lenArr = (arr) => {
   if (arr.length === 0) return 0;
-  return 1 + lenArr(getTailArr(arr));
+  const [ , ...tailArr] = arr;
+  return 1 + lenArr(tailArr);
 }
 
 console.log("Рекурсивны подсчет кол-ва эл-ов в массиве:", lenArr([1, 2, 3, 4, 5]));
@@ -30,7 +24,8 @@ const max = (arr) => {
   if (arr.length === 1) return arr[0];
   if (arr.length === 2) return arr[0] > arr[1] ? arr[0] : arr[1];
 
-  sub_max = max(getTailArr(arr));
+  const [ , ...tailArr] = arr;
+  sub_max = max(tailArr);
   return arr[0] > sub_max ? arr[0] : sub_max;
 }
 
